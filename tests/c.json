@@ -1,0 +1,630 @@
+{
+    "messages": [
+        {
+            "role": "system",
+            "content": "You are an AI programming assistant.\nWhen asked for your name, you must respond with \"GitHub Copilot\".\nFollow the user's requirements carefully & to the letter.\nFollow Microsoft content policies.\nAvoid content that violates copyrights.\nIf you are asked to generate content that is harmful, hateful, racist, sexist, lewd, violent, or completely irrelevant to software engineering, only respond with \"Sorry, I can't assist with that.\"\nKeep your answers short and impersonal.\n<instructions>\nYou are a highly sophisticated automated coding agent with expert-level knowledge across many different programming languages and frameworks.\nThe user will ask a question, or ask you to perform a task, and it may require lots of research to answer correctly. There is a selection of tools that let you perform actions or retrieve helpful context to answer the user's question.\nIf you can infer the project type (languages, frameworks, and libraries) from the user's query or the context that you have, make sure to keep them in mind when making changes.\nIf the user wants you to implement a feature and they have not specified the files to edit, first break down the user's request into smaller concepts and think about the kinds of files you need to grasp each concept.\nIf you aren't sure which tool is relevant, you can call multiple tools. You can call tools repeatedly to take actions or gather as much context as needed until you have completed the task fully. Don't give up unless you are sure the request cannot be fulfilled with the tools you have. It's YOUR RESPONSIBILITY to make sure that you have done all you can to collect necessary context.\nPrefer using the semantic_search tool to search for context unless you know the exact string or filename pattern you're searching for.\nDon't make assumptions about the situation- gather context first, then perform the task or answer the question.\nThink creatively and explore the workspace in order to make a complete fix.\nDon't repeat yourself after a tool call, pick up where you left off.\nNEVER print out a codeblock with file changes unless the user asked for it. Use the insert_edit_into_file tool instead.\nNEVER print out a codeblock with a terminal command to run unless the user asked for it. Use the run_in_terminal tool instead.\nYou don't need to read a file if it's already provided in context.\n</instructions>\n<toolUseInstructions>\nWhen using a tool, follow the json schema very carefully and make sure to include ALL required properties.\nAlways output valid JSON when using a tool.\nIf a tool exists to do a task, use the tool instead of asking the user to manually take an action.\nIf you say that you will take an action, then go ahead and use the tool to do it. No need to ask permission.\nNever use multi_tool_use.parallel or any tool that does not exist. Use tools using the proper procedure, DO NOT write out a json codeblock with the tool inputs.\nNever say the name of a tool to a user. For example, instead of saying that you'll use the run_in_terminal tool, say \"I'll run the command in a terminal\".\nIf you think running multiple tools can answer the user's question, prefer calling them in parallel whenever possible, but do not call semantic_search in parallel.\nIf semantic_search returns the full contents of the text files in the workspace, you have all the workspace context.\nDon't call the run_in_terminal tool multiple times in parallel. Instead, run one command and wait for the output before running the next command.\nAfter you have performed the user's task, if the user corrected something you did, expressed a coding preference, or communicated a fact that you need to remember, use the update_user_preferences tool to save their preferences.\n\n</toolUseInstructions>\n<editFileInstructions>\nDon't try to edit an existing file without reading it first, so you can make changes properly.\nUse the insert_edit_into_file tool to edit files. When editing files, group your changes by file.\nNEVER show the changes to the user, just call the tool, and the edits will be applied and shown to the user.\nNEVER print a codeblock that represents a change to a file, use insert_edit_into_file instead.\nFor each file, give a short description of what needs to be changed, then use the insert_edit_into_file tool. You can use any tool multiple times in a response, and you can keep writing text after using a tool.\nFollow best practices when editing files. If a popular external library exists to solve a problem, use it and properly install the package e.g. with \"npm install\" or creating a \"requirements.txt\".\nAfter editing a file, you MUST call get_errors to validate the change. Fix the errors if they are relevant to your change or the prompt, and remember to validate that they were actually fixed.\nThe insert_edit_into_file tool is very smart and can understand how to apply your edits to the user's files, you just need to provide minimal hints.\nWhen you use the insert_edit_into_file tool, avoid repeating existing code, instead use comments to represent regions of unchanged code. The tool prefers that you are as concise as possible. For example:\n// ...existing code...\nchanged code\n// ...existing code...\nchanged code\n// ...existing code...\n\nHere is an example of how you should format an edit to an existing Person class:\nclass Person {\n\t// ...existing code...\n\tage: number;\n\t// ...existing code...\n\tgetAge() {\n\t\treturn this.age;\n\t}\n}\n</editFileInstructions>\nRespond in the following locale: zh-CN"
+        },
+        {
+            "role": "user",
+            "content": "现在有哪些在建的项目？"
+        },
+        {
+            "role": "assistant",
+            "content": "我需要查看一下有哪些在建项目的相关信息。让我使用工具来获取这些数据。",
+            "tool_calls": [
+                {
+                    "function": {
+                        "name": "9f1_get-objects",
+                        "arguments": "{}"
+                    },
+                    "id": "tooluse_bpuMIxEwRUWk_ozqR96B1Q",
+                    "type": "function"
+                }
+            ]
+        },
+        {
+            "role": "tool",
+            "content": "[{\"label\":\"物料编码\",\"name\":\"CustomObject1012\"},{\"label\":\"zy子2\",\"name\":\"CustomObject292\"},{\"label\":\"zy主2\",\"name\":\"CustomObject291\"},{\"label\":\"打包测试对象2\",\"name\":\"CustomObject937\"},{\"label\":\"编号对象\",\"name\":\"CustomObject773\"},{\"label\":\"测试对象\",\"name\":\"CustomObject772\"},{\"label\":\"csh-主子对象-树子对象\",\"name\":\"CustomObject744\"},{\"label\":\"1\",\"name\":\"project__bm\"},{\"label\":\"查找对象2\",\"name\":\"CustomObject721\"},{\"label\":\"查找对象1\",\"name\":\"CustomObject720\"},{\"label\":\"标准对象1\",\"name\":\"CustomObject719\"},{\"label\":\"测试2\",\"name\":\"CustomObject707\"},{\"label\":\"测试1\",\"name\":\"CustomObject706\"},{\"label\":\"软件包对象\",\"name\":\"CustomPackageObject\"},{\"label\":\"动态查找关系对象\",\"name\":\"CustomObject681\"},{\"label\":\"变更集打包测试对象\",\"name\":\"CustomObject662\"},{\"label\":\"阶段推进记录\",\"name\":\"oppStageChangeRecord\"},{\"label\":\"引用子对象\",\"name\":\"CustomObject622\"},{\"label\":\"引用主子对象\",\"name\":\"CustomObject621\"},{\"label\":\"测试11111\",\"name\":\"CustomObject579\"},{\"label\":\"标签客户\",\"name\":\"CustomObject571\"},{\"label\":\"标签\",\"name\":\"CustomObject570\"},{\"label\":\"演示-库存\",\"name\":\"CustomObject371\"},{\"label\":\"自查找对象\",\"name\":\"CustomObject352\"},{\"label\":\"Epl测试对象2\",\"name\":\"CustomObject12\"},{\"label\":\"演示-订单\",\"name\":\"CustomObject319\"},{\"label\":\"演示-商品\",\"name\":\"CustomObject318\"},{\"label\":\"Epl测试对象（新增）\",\"name\":\"CustomObject303\"},{\"label\":\"Epl测试对象\",\"name\":\"CustomObject298\"},{\"label\":\"标准树对象\",\"name\":\"CustomObject252\"},{\"label\":\"管线明细\",\"name\":\"CustomObject246\"},{\"label\":\"项目管线\",\"name\":\"CustomObject248\"},{\"label\":\"管线\",\"name\":\"CustomObject243\"},{\"label\":\"csh业务普通对象\",\"name\":\"CustomBaseObject222\"},{\"label\":\"csh业务树对象\",\"name\":\"CustomChildTreeObject221\"},{\"label\":\"csh业务树主子+普通子对象\",\"name\":\"CustomTreeObject220\"},{\"label\":\"zy树子对象\",\"name\":\"CustomObject208\"},{\"label\":\"订单111\",\"name\":\"CustomObject153\"},{\"label\":\"外部单位\",\"name\":\"outer_project\"},{\"label\":\"前端低代码明细\",\"name\":\"lowCodeDetail\"},{\"label\":\"前端低代码\",\"name\":\"lowCode\"},{\"label\":\"审批测试对象\",\"name\":\"CustomObject416\"},{\"label\":\"树子对象\",\"name\":\"CustomObject395\"},{\"label\":\"zy子子2\",\"name\":\"CustomObject34812\"},{\"label\":\"zy主子2\",\"name\":\"CustomObject3472\"},{\"label\":\"zy子子1\",\"name\":\"CustomObject346\"},{\"label\":\"zy主子1\",\"name\":\"CustomObject345\"},{\"label\":\"zy标准对象\",\"name\":\"CustomObject344\"},{\"label\":\"ch-原对象22-子对象1\",\"name\":\"CustomObject326\"},{\"label\":\"ch-原对象22\",\"name\":\"CustomObject325\"},{\"label\":\"ch-原对象\",\"name\":\"CustomObject320\"},{\"label\":\"十月大厦团队\",\"name\":\"CustomObject76__bm\"},{\"label\":\"葡萄籽\",\"name\":\"CustomObject288\"},{\"label\":\"葡萄主子\",\"name\":\"CustomObject2871\"},{\"label\":\"csh-主子对象-子对象\",\"name\":\"CustomObject349\"},{\"label\":\"csh-主子对象\",\"name\":\"CustomObject348\"},{\"label\":\"表达式标准\",\"name\":\"CustomObject273\"},{\"label\":\"对象b\",\"name\":\"CustomObject259\"},{\"label\":\"对象a\",\"name\":\"CustomObject2581\"},{\"label\":\"住宅\",\"name\":\"C1ustomObject236\"},{\"label\":\"上游子\",\"name\":\"CustomObject233\"},{\"label\":\"上游主子\",\"name\":\"CustomObject232\"},{\"label\":\"引用测试子\",\"name\":\"CustomObject231111\"},{\"label\":\"引用测试主子\",\"name\":\"CustomObject230111\"},{\"label\":\"小海豚11\",\"name\":\"CustomObject229\"},{\"label\":\"巨魔标准\",\"name\":\"CustomObject2283\"},{\"label\":\"巨魔子1\",\"name\":\"CustomObject22323\"},{\"label\":\"巨魔标准主子\",\"name\":\"CustomObject22243\"},{\"label\":\"海豚2子\",\"name\":\"CustomObject219\"},{\"label\":\"海豚2\",\"name\":\"CustomObject218\"},{\"label\":\"劳务工资支付明细\",\"name\":\"detailsOfLaborWagePayment\"},{\"label\":\"劳务考勤明细\",\"name\":\"laborAttendanceDetails\"},{\"label\":\"劳务工资核算明细\",\"name\":\"payrollDetails\"},{\"label\":\"劳务考勤统计\",\"name\":\"laborAttendanceStatistics\"},{\"label\":\"劳务人员花名册\",\"name\":\"personneRoster\"},{\"label\":\"劳务工资核算\",\"name\":\"calculationOfSalary\"},{\"label\":\"劳务工资支付\",\"name\":\"paymentOfLaborWages\"},{\"label\":\"班组统计\",\"name\":\"teamStatistics\"},{\"label\":\"参建单位信息\",\"name\":\"participatingUnits\"},{\"label\":\"zbi子对象2\",\"name\":\"CustomObject197\"},{\"label\":\"sub-zbitest\",\"name\":\"CustomObject196\"},{\"label\":\"zy子1\",\"name\":\"CustomObject189\"},{\"label\":\"zy主1\",\"name\":\"CustomObject188\"},{\"label\":\"小河豚\",\"name\":\"CustomObject1857\"},{\"label\":\"海豚主子\",\"name\":\"CustomObject184\"},{\"label\":\"zbi-test\",\"name\":\"CustomObject180\"},{\"label\":\"变更主—子\",\"name\":\"CustomObject167\"},{\"label\":\"变更主-主\",\"name\":\"CustomObject166\"},{\"label\":\"yyy对象\",\"name\":\"CustomObject140\"},{\"label\":\"jl测试\",\"name\":\"CustomObject138\"},{\"label\":\"删除子1\",\"name\":\"CustomObject99\"},{\"label\":\"删除1\",\"name\":\"CustomObject98\"},{\"label\":\"删除子对象\",\"name\":\"CustomObject88\"},{\"label\":\"删除主子对象\",\"name\":\"CustomObject87\"},{\"label\":\"树形子二\",\"name\":\"CustomObject70\"},{\"label\":\"普通子二\",\"name\":\"CustomObject69\"},{\"label\":\"树形子一\",\"name\":\"CustomObject68\"},{\"label\":\"普通子一\",\"name\":\"CustomObject66\"},{\"label\":\"转化目标多子多树对象\",\"name\":\"CustomObject65\"},{\"label\":\"广告栏访问日志\",\"name\":\"CustomObject12456__c\"},{\"label\":\"广告栏客户信息\",\"name\":\"CustomObject12455__c\"},{\"label\":\"普通1\",\"name\":\"CustomObject8\"},{\"label\":\"11\",\"name\":\"CustomObject2\"},{\"label\":\"22\",\"name\":\"CustomObject1\"},{\"label\":\"标准_树形子1\",\"name\":\"CustomObject347\"},{\"label\":\"124\",\"name\":\"CustomObject324\"},{\"label\":\"自定义对象\",\"name\":\"CustomObject302\"},{\"label\":\"标准2\",\"name\":\"CustomObject295\"},{\"label\":\"标准\",\"name\":\"CustomObject293\"},{\"label\":\"j关联对象\",\"name\":\"CustomObject289\"},{\"label\":\"yyy标准对象\",\"name\":\"CustomObject287\"},{\"label\":\"zy子对象\",\"name\":\"CustomObject281\"},{\"label\":\"zy主子对象\",\"name\":\"CustomObject280\"},{\"label\":\"j树主对象\",\"name\":\"CustomObject278\"},{\"label\":\"普通子2\",\"name\":\"CustomObject271\"},{\"label\":\"混合树形子2\",\"name\":\"CustomObject270\"},{\"label\":\"混合普通子2\",\"name\":\"CustomObject269\"},{\"label\":\"混合树形子1\",\"name\":\"CustomObject268\"},{\"label\":\"混合普通1\",\"name\":\"CustomObject267\"},{\"label\":\"wwf混合多子\",\"name\":\"CustomObject266\"},{\"label\":\"普通子1\",\"name\":\"CustomObject263\"},{\"label\":\"wwf普通多子\",\"name\":\"CustomObject262\"},{\"label\":\"wwf标准3\",\"name\":\"CustomObject260\"},{\"label\":\"q1\",\"name\":\"CustomObject258\"},{\"label\":\"订单明细1\",\"name\":\"CustomObject245\"},{\"label\":\"订单1\",\"name\":\"CustomObject244\"},{\"label\":\"子对象1\",\"name\":\"CustomObject237\"},{\"label\":\"wwf普通主子\",\"name\":\"CustomObject236\"},{\"label\":\"wwf标准2\",\"name\":\"CustomObject231\"},{\"label\":\"树形子1\",\"name\":\"CustomObject228\"},{\"label\":\"wwf树形主子\",\"name\":\"CustomObject227\"},{\"label\":\"wwf标准\",\"name\":\"CustomObject226\"},{\"label\":\"cc树主对象\",\"name\":\"CustomObject223\"},{\"label\":\"工程造价\",\"name\":\"CustomObject185\"},{\"label\":\"会员\",\"name\":\"CustomObject168\"},{\"label\":\"p18软件包-汇总对象\",\"name\":\"CustomObject146\"},{\"label\":\"p18软件包-子对象\",\"name\":\"CustomObject145\"},{\"label\":\"p18软件包-主对象\",\"name\":\"CustomObject144\"},{\"label\":\"客户拜访标准对象\",\"name\":\"CustomObject137_package\"},{\"label\":\"主子2\",\"name\":\"CustomObject136\"},{\"label\":\"软件包1编号主标题\",\"name\":\"CustomObject116\"},{\"label\":\"软件包1子对象\",\"name\":\"CustomObject115\"},{\"label\":\"软件包1主对象\",\"name\":\"CustomObject114\"},{\"label\":\"p汇总对象1\",\"name\":\"CustomObject113\"},{\"label\":\"p子对象1\",\"name\":\"CustomObject108\"},{\"label\":\"p主子对象1\",\"name\":\"CustomObject106\"},{\"label\":\"软件包组件\",\"name\":\"PackageComponent\"},{\"label\":\"包依赖关系\",\"name\":\"PackageDependency\"},{\"label\":\"软件包\",\"name\":\"Package\"},{\"label\":\"无权限对象\",\"name\":\"CustomObject76\"},{\"label\":\"编码对象00\",\"name\":\"CustomObject41\"},{\"label\":\"商品混凝土测试\",\"name\":\"CustomObject19\"},{\"label\":\"办公费用\",\"name\":\"CustomObject9\"},{\"label\":\"材料结算明细\",\"name\":\"PCMaterialSTMDetailed\"},{\"label\":\"周转材合同结算明细\",\"name\":\"PCZZCLeaseSTMDetailed\"},{\"label\":\"开票申请\",\"name\":\"InvoiceApplication\"},{\"label\":\"分包合同过程结算\",\"name\":\"PCSubcontractsProcessSTM\"},{\"label\":\"分包变更签证索赔台账\",\"name\":\"PCSubChangeVisaClaimLedger\"},{\"label\":\"分包合同最终结算\",\"name\":\"PCSubcontractsSTM\"},{\"label\":\"甲方报量\",\"name\":\"PCMainPartyAQuantity\"},{\"label\":\"材料申购明细\",\"name\":\"clsgmx20\"},{\"label\":\"## 回款记录\",\"name\":\"payback\"},{\"label\":\"周转材租赁合同明细\",\"name\":\"PCZZCLeaseDetailed\"},{\"label\":\"周转材租赁合同结算\",\"name\":\"PCZZCLeaseSTM\"},{\"label\":\"大型设备安拆合同结算明细\",\"name\":\"PCLargeEquipmentACSTMDetailed\"},{\"label\":\"分包清单\",\"name\":\"subcontractsBill\"},{\"label\":\"工程量清单\",\"name\":\"PCMainQuantitiesBill\"},{\"label\":\"费用明细\",\"name\":\"FYMX20\"},{\"label\":\"项目验收\",\"name\":\"xmys20\"},{\"label\":\"设备租赁合同结算明细\",\"name\":\"PCEquipmentLeaseSTMDetailed\"},{\"label\":\"材料到货明细\",\"name\":\"cldhmx20\"},{\"label\":\"收款登记\",\"name\":\"CollectionRegistration\"},{\"label\":\"项目其他支出合同结算明细\",\"name\":\"PCProjectOtherExpenditureSTMDetailed\"},{\"label\":\"报价单明细\",\"name\":\"quotationItem\"},{\"label\":\"项目其他收入合同结算明细\",\"name\":\"PCProjectOtherIncomeSTMDetailed\"},{\"label\":\"附加费结算明细\",\"name\":\"PCSTSupplySurchargeSTMDetailed\"},{\"label\":\"二次经营记录\",\"name\":\"PCMainSecondBusinessRecord\"},{\"label\":\"设备租赁合同结算\",\"name\":\"PCEquipmentLeaseSTM\"},{\"label\":\"收票登记\",\"name\":\"TicketRegistration\"},{\"label\":\"质保金回收计划\",\"name\":\"zbjhstx20\"},{\"label\":\"材料采购合同明细\",\"name\":\"PCMaterialDetailed\"},{\"label\":\"付款申请\",\"name\":\"PaymentApplication\"},{\"label\":\"工程结算\",\"name\":\"PCMainProjectSTM\"},{\"label\":\"## 任务汇报-未完工\",\"name\":\"rwhb20\"},{\"label\":\"大型设备安拆合同明细\",\"name\":\"PCLargeEquipmentACDetailed\"},{\"label\":\"商砼供应合同结算明细\",\"name\":\"PCSTSupplySTMDetailed\"},{\"label\":\"设备购置合同明细\",\"name\":\"PCEquipmentPurchasingDetailed\"},{\"label\":\"项目其他收入合同结算\",\"name\":\"PCProjectOtherIncomeSTM\"},{\"label\":\"分包合同\",\"name\":\"PCSubcontracts\"},{\"label\":\"大型设备安拆合同结算\",\"name\":\"PCLargeEquipmentACSTM\"},{\"label\":\"材料申购\",\"name\":\"clsg20\"},{\"label\":\"质量安全整改\",\"name\":\"zlaqzg20\"},{\"label\":\"## 交付单明细\",\"name\":\"deliveryOrderItem\"},{\"label\":\"主合同登记\",\"name\":\"PCMain\"},{\"label\":\"材料到货\",\"name\":\"cldh20\"},{\"label\":\"商砼供应合同明细\",\"name\":\"PCSTSupplyDetailed\"},{\"label\":\"项目其他支出合同明细\",\"name\":\"PCProjectOtherExpenditureDetailed\"},{\"label\":\"设备租赁合同明细\",\"name\":\"PCEquipmentLeaseDetailed\"},{\"label\":\"项目其他支出合同结算\",\"name\":\"PCProjectOtherExpenditureSTM\"},{\"label\":\"## 订单明细\",\"name\":\"orderItem\"},{\"label\":\"项目其他支出合同\",\"name\":\"PCProjectOtherExpenditure\"},{\"label\":\"材料采购合同结算\",\"name\":\"PCMaterialPurchaseSTM\"},{\"label\":\"费用报销\",\"name\":\"FYBX20\"},{\"label\":\"商砼供应合同附加费明细\",\"name\":\"PCSTSupplySurchargeDetailed\"},{\"label\":\"材料采购合同\",\"name\":\"PCMaterialPurchase\"},{\"label\":\"周转材租赁合同\",\"name\":\"PCZZCLease\"},{\"label\":\"质量安全检查\",\"name\":\"zlaqjc20\"},{\"label\":\"设备购置合同\",\"name\":\"PCEquipmentPurchasing\"},{\"label\":\"## 订单\",\"name\":\"order\"},{\"label\":\"商砼供应合同结算\",\"name\":\"PCSTSupplySTM\"},{\"label\":\"成本预算明细\",\"name\":\"cbysmx20\"},{\"label\":\"设备租赁合同\",\"name\":\"PCEquipmentLease\"},{\"label\":\"## 机会联系人\",\"name\":\"opportunityContacts\"},{\"label\":\"商砼供应合同\",\"name\":\"PCSTSupply\"},{\"label\":\"主合同评审\",\"name\":\"PCMainReview\"},{\"label\":\"## 报价单\",\"name\":\"quotation\"},{\"label\":\"## 机会明细\",\"name\":\"opportunityItem\"},{\"label\":\"非项目收入合同结算明细\",\"name\":\"PCNonProjectIncomeSTMDetailed\"},{\"label\":\"项目其他收入合同明细\",\"name\":\"PCProjectOtherIncomeDetailed\"},{\"label\":\"## 合同\",\"name\":\"contract\"},{\"label\":\"## 任务发布-未完工\",\"name\":\"rwfb20\"},{\"label\":\"大型设备安拆合同\",\"name\":\"PCLargeEquipmentAC\"},{\"label\":\"用印申请\",\"name\":\"yysq20\"},{\"label\":\"项目其他收入合同\",\"name\":\"PCProjectOtherIncome\"},{\"label\":\"投标管理\",\"name\":\"tbgl20\"},{\"label\":\"成本预算\",\"name\":\"cbys20\"},{\"label\":\"## 销售机会\",\"name\":\"opportunity\"},{\"label\":\"非项目支出合同结算明细\",\"name\":\"PCNonProjectExpenditureSTMDetailed\"},{\"label\":\"非项目收入合同结算\",\"name\":\"PCNonProjectIncomeSTM\"},{\"label\":\"施工日志\",\"name\":\"sgrz20\"},{\"label\":\"项目\",\"name\":\"project\"},{\"label\":\"活动\",\"name\":\"activity\"},{\"label\":\"非项目支出合同明细\",\"name\":\"PCNonProjectExpenditureDetailed\"},{\"label\":\"非项目支出合同结算\",\"name\":\"PCNonProjectExpenditureSTM\"},{\"label\":\"非项目收入合同明细\",\"name\":\"PCNonProjectIncomeDetailed\"},{\"label\":\"## 交付单\",\"name\":\"deliveryOrder\"},{\"label\":\"非项目收入合同\",\"name\":\"PCNonProjectIncome\"},{\"label\":\"联系人\",\"name\":\"contact\"},{\"label\":\"## 线索\",\"name\":\"clue\"},{\"label\":\"客户\",\"name\":\"customer\"},{\"label\":\"非项目支出合同\",\"name\":\"PCNonProjectExpenditure\"},{\"label\":\"## 产品\",\"name\":\"product\"},{\"label\":\"分供方\",\"name\":\"supplier\"},{\"label\":\"非项目其他合同明细\",\"name\":\"PCOtherDetailed\"},{\"label\":\"非项目其他合同\",\"name\":\"PCOther\"},{\"label\":\"## 费用\",\"name\":\"cost\"},{\"label\":\"证书档案\",\"name\":\"xsda20\"},{\"label\":\"收藏夹\",\"name\":\"myFavorite\"}]",
+            "tool_call_id": "tooluse_bpuMIxEwRUWk_ozqR96B1Q"
+        },
+        {
+            "role": "assistant",
+            "content": "根据查询结果，系统中有大量的项目对象。我看到这些项目主要分为几类：\n\n1. **工程建设类项目**：\n   - 项目（project）- 这是主要的项目对象\n   - 在建工程相关的项目，如工程结算、主合同登记等\n\n2. **商务类项目**：\n   - 销售机会（opportunity）\n   - 合同（contract）\n   - 报价单（quotation）\n   - 订单（order）\n\n3. **材料与设备管理项目**：\n   - 材料采购合同\n   - 设备租赁合同\n   - 大型设备安拆合同\n\n4. **财务与结算项目**：\n   - 付款申请\n   - 收款登记\n   - 成本预算\n   - 费用报销\n\n5. **其他业务项目**：\n   - 质量安全检查\n   - 施工日志\n   - 任务管理相关\n\n让我查看一下具体的项目数据，我将查询当前的项目信息：",
+            "tool_calls": [
+                {
+                    "function": {
+                        "name": "9f1_get-object-data-by-sql",
+                        "arguments": "{\"sql\": \"SELECT * FROM project LIMIT 10\"}"
+                    },
+                    "id": "tooluse_R5cb4tSNSxKLTSuPSVIs_g",
+                    "type": "function"
+                }
+            ]
+        },
+        {
+            "role": "tool",
+            "content": "null",
+            "tool_call_id": "tooluse_R5cb4tSNSxKLTSuPSVIs_g"
+        },
+        {
+            "role": "assistant",
+            "content": "我尝试查询项目数据，但返回结果为空（null）。这可能有几种原因：\n\n1. 当前系统中没有实际的项目数据\n2. 项目表可能使用了其他名称或结构\n3. 可能需要特定的权限才能访问项目数据\n\n让我尝试查询一些其他相关对象，来找出在建项目的信息：",
+            "tool_calls": [
+                {
+                    "function": {
+                        "name": "9f1_get-object-desc",
+                        "arguments": "{\"name\": \"project\"}"
+                    },
+                    "id": "tooluse_Xt52dMTKRaeSeKfQgnSaRg",
+                    "type": "function"
+                }
+            ]
+        },
+        {
+            "role": "tool",
+            "content": "{\"bizTypes\":[{\"name\":\"bizTypQQ\",\"label\":\"前期项目\"},{\"name\":\"defaultBizType\",\"label\":\"正式项目\"}],\"fields\":[{\"type\":\"Location\",\"subType\":\"Any\",\"name\":\"field2\",\"label\":\"项目位置\"},{\"type\":\"Select\",\"subType\":\"Local\",\"name\":\"serviceCondition\",\"label\":\"劳务使用状态\",\"selectItems\":[{\"name\":\"o1\",\"label\":\"未使用\"},{\"name\":\"o2\",\"label\":\"使用中\"},{\"name\":\"o3\",\"label\":\"已停用\"}]},{\"type\":\"Boolean\",\"name\":\"whetherPushed\",\"label\":\"是否已推送至劳务\"},{\"type\":\"Time\",\"name\":\"latestPushTime\",\"label\":\"最新推送时间\"},{\"type\":\"Text\",\"subType\":\"Short\",\"name\":\"latestPushResults\",\"label\":\"最新推送结果\"},{\"type\":\"Text\",\"subType\":\"Short\",\"name\":\"projectDockingCode\",\"label\":\"L-项目识别码\"},{\"type\":\"Real\",\"name\":\"field1\",\"label\":\"实数b1\"},{\"type\":\"Select\",\"subType\":\"Public\",\"name\":\"operationType\",\"label\":\"经营类型(系统)\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"xmqtsrhtjsje\",\"label\":\"F-累计项目其他收入合同结算金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljzzczlhtjsje\",\"label\":\"F-累计周转材租赁合同结算金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"clysze\",\"label\":\"材料预算总额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljstjtjsje\",\"label\":\"F-累计商砼合同结算金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"fbysze\",\"label\":\"分包预算总额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljfbhtfkje\",\"label\":\"F-累计分包合同付款金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljachtjsje\",\"label\":\"F-累计安拆合同结算金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljstgyhtfkje\",\"label\":\"F-累计商砼供应合同付款金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"qtfyysze\",\"label\":\"其他费用预算总额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljclcghtjsje\",\"label\":\"F-累计材料采购合同结算金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljsbgzhtfkje\",\"label\":\"F-累计设备购置合同付款金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljxmbx\",\"label\":\"累计项目报销金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"jxysze\",\"label\":\"机械预算总额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"zcbys\",\"label\":\"预算总额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljsbzlhtfkje\",\"label\":\"F-累计设备租赁合同付款金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"zhtjsje\",\"label\":\"F-累计主合同结算金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljzzcjlhtfkje\",\"label\":\"F-累计周转材租赁合同付款金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljdxsbachtfkje\",\"label\":\"F-累计大型设备安拆合同付款金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljxmqtzchtfkje\",\"label\":\"F-累计项目其他支出合同付款金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljecjyje\",\"label\":\"F-累计二次经营金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljxmqtzchtjsje\",\"label\":\"F-累计项目其他支出合同结算金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljxmqtsrhtje\",\"label\":\"F-累计项目其他收入合同金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljfkje\",\"label\":\"累计项目付款\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljclcghtje\",\"label\":\"F-累计材料采购合同金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljsbzlhtjsje\",\"label\":\"F-累计设备租赁合同结算金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljsthtje\",\"label\":\"F-累计商砼合同金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljsbzlhtje\",\"label\":\"F-累计设备租赁合同金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljclcghtfkje\",\"label\":\"F-累计材料采购合同付款金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"fbjsze\",\"label\":\"分包结算总额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljachtje\",\"label\":\"F-累计安拆合同金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljskje\",\"label\":\"累计收款金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljspje\",\"label\":\"累计收票金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljzzczlhtje\",\"label\":\"F-累计周转材租赁合同金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljkpje\",\"label\":\"累计开票金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljfbhtje\",\"label\":\"F-累计分包合同金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljfbbgje\",\"label\":\"F-累计分包变更金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljxmqtzchtje\",\"label\":\"F-累计项目其他支出合同金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljsbgzhtje\",\"label\":\"F-累计设备购置合同金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"field101\",\"label\":\"F-累计无合同支出金额\"},{\"type\":\"Aggregation\",\"subType\":\"Count\",\"name\":\"ljzhts\",\"label\":\"F-累计主合同数\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljzhtje\",\"label\":\"F-累计主合同金额\"},{\"type\":\"Select\",\"subType\":\"Public\",\"name\":\"projectStatus\",\"label\":\"项目状态\"},{\"type\":\"District\",\"name\":\"projectAddress\",\"label\":\"工程地域\"},{\"type\":\"Lookup\",\"subType\":\"Org\",\"name\":\"projectDept\",\"label\":\"所属项目部\"},{\"type\":\"Lookup\",\"subType\":\"User\",\"name\":\"updatedBy\",\"label\":\"修改人\"},{\"type\":\"Time\",\"name\":\"updatedOn\",\"label\":\"修改时间\"},{\"type\":\"Boolean\",\"name\":\"isReadOnly\",\"label\":\"只读\"},{\"type\":\"BizType\",\"name\":\"bizType\",\"label\":\"项目阶段\"},{\"type\":\"Lookup\",\"subType\":\"User\",\"name\":\"owner\",\"label\":\"负责人\"},{\"type\":\"Lookup\",\"subType\":\"Org\",\"name\":\"dept\",\"label\":\"所属部门\"},{\"type\":\"Lookup\",\"subType\":\"User\",\"name\":\"createdBy\",\"label\":\"创建人\"},{\"type\":\"Time\",\"name\":\"createdOn\",\"label\":\"创建时间\"},{\"type\":\"Text\",\"subType\":\"Short\",\"name\":\"name\",\"label\":\"项目名称\"},{\"type\":\"AutoCode\",\"name\":\"xmbh\",\"label\":\"项目编号\"},{\"type\":\"Select\",\"subType\":\"Local\",\"name\":\"xmlb\",\"label\":\"项目类别\",\"selectItems\":[{\"name\":\"option238\",\"label\":\"房建\"},{\"name\":\"option239\",\"label\":\"市政\"},{\"name\":\"option240\",\"label\":\"机电安装\"},{\"name\":\"option241\",\"label\":\"公路\"},{\"name\":\"option242\",\"label\":\"铁路\"},{\"name\":\"option243\",\"label\":\"电力\"},{\"name\":\"option244\",\"label\":\"水利水电\"},{\"name\":\"option245\",\"label\":\"其他\"}]},{\"type\":\"Select\",\"subType\":\"Local\",\"name\":\"jylx\",\"label\":\"经营类型\",\"selectItems\":[{\"name\":\"option246\",\"label\":\"自营\"},{\"name\":\"option247\",\"label\":\"联营\"}]},{\"type\":\"Lookup\",\"subType\":\"customer\",\"name\":\"khmc\",\"label\":\"客户\"},{\"type\":\"Date\",\"name\":\"jhkgsj\",\"label\":\"计划开工时间\"},{\"type\":\"Date\",\"name\":\"jhjgsj\",\"label\":\"计划竣工时间\"},{\"type\":\"Expression\",\"subType\":\"Number\",\"name\":\"gq\",\"label\":\"工期\"},{\"type\":\"Text\",\"subType\":\"Text\",\"name\":\"gcgk\",\"label\":\"工程概况\"},{\"type\":\"Text\",\"subType\":\"Text\",\"name\":\"bz\",\"label\":\"备注\"},{\"type\":\"File\",\"name\":\"fj\",\"label\":\"附件\"},{\"type\":\"Lookup\",\"subType\":\"User\",\"name\":\"xmjl\",\"label\":\"项目经理\"},{\"type\":\"MultiLookup\",\"subType\":\"User\",\"name\":\"ysy\",\"label\":\"预算员\"},{\"type\":\"MultiLookup\",\"subType\":\"User\",\"name\":\"cly\",\"label\":\"材料员\"},{\"type\":\"MultiLookup\",\"subType\":\"User\",\"name\":\"zlaqy\",\"label\":\"质量安全员\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"xmzjye\",\"label\":\"项目现金流\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"ljsjcb\",\"label\":\"累计支出金额\"},{\"type\":\"Expression\",\"subType\":\"Percent\",\"name\":\"yssybl\",\"label\":\"管理利润率\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"ljjxjse\",\"label\":\"机械结算总额\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"ljcljse\",\"label\":\"材料结算总额\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"ljzchte\",\"label\":\"支出合同总额\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"qtfyze\",\"label\":\"其他费用总额\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"dtcb\",\"label\":\"动态成本\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"bjcb\",\"label\":\"管理利润\"},{\"type\":\"Expression\",\"subType\":\"Percent\",\"name\":\"cljszysbl\",\"label\":\"材料结算占预算比例\"},{\"type\":\"Expression\",\"subType\":\"Percent\",\"name\":\"jxjszysbl\",\"label\":\"机械结算占预算比例\"},{\"type\":\"Expression\",\"subType\":\"Percent\",\"name\":\"fbjszysbl\",\"label\":\"分包结算占预算比例\"},{\"type\":\"Expression\",\"subType\":\"Percent\",\"name\":\"qtfyzysbl\",\"label\":\"其他费用占预算比例\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"srhtze\",\"label\":\"收入合同总额\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"szhtce\",\"label\":\"收支合同差额\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"srhtjsze\",\"label\":\"收入合同结算总额\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"ys\",\"label\":\"应收（收入结算-收款）\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"ljzchtjsje\",\"label\":\"累计支出合同结算金额\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"ljzchtfkje\",\"label\":\"累计支出合同付款金额\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"yf\",\"label\":\"应付（支出结算-付款）\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"spjsc\",\"label\":\"收票结算差\"},{\"type\":\"Text\",\"subType\":\"Short\",\"name\":\"gcxxdz\",\"label\":\"工程详细地址\"},{\"type\":\"Text\",\"subType\":\"Short\",\"name\":\"xmjc\",\"label\":\"项目简称\"},{\"type\":\"Text\",\"subType\":\"Text\",\"name\":\"sm\",\"label\":\"说明\"}],\"name\":\"project\",\"label\":\"项目\"}",
+            "tool_call_id": "tooluse_Xt52dMTKRaeSeKfQgnSaRg"
+        },
+        {
+            "role": "assistant",
+            "content": "从我查询到的信息来看，系统中存在一个名为\"project\"（项目）的对象。该对象分为两种业务类型：\n1. 前期项目（bizTypQQ）\n2. 正式项目（defaultBizType）\n\n项目对象包含丰富的字段，主要涵盖以下几个方面：\n- 基本信息：项目名称、项目编号、项目简称、项目类别、经营类型等\n- 地理信息：工程地域、项目位置、工程详细地址\n- 时间信息：计划开工时间、计划竣工时间、工期\n- 人员信息：项目经理、预算员、材料员、质量安全员等\n- 财务信息：大量的预算、结算、合同金额相关字段\n- 状态信息：项目状态\n\n我尝试查询具体的在建项目数据，但系统返回为空，这可能是因为当前没有实际的项目数据，或者需要特定的访问权限。\n\n根据系统中的对象结构，我们可以看到还有许多与项目相关的对象，如：\n- 主合同登记（PCMain）\n- 工程结算（PCMainProjectSTM）\n- 分包合同（PCSubcontracts）\n- 材料采购合同（PCMaterialPurchase）\n- 设备租赁合同（PCEquipmentLease）\n\n这些对象共同构成了完整的项目管理体系，涵盖了从项目立项、合同签订、材料采购、施工管理到最终结算的全过程。\n\n如果您想了解具体的在建项目，您可能需要提供更多的权限信息或者指定具体的查询参数。您是否需要查询某个特定类型的在建项目信息？"
+        },
+        {
+            "role": "user",
+            "content": "<context>\nThe current date is May 4, 2025.\nMy current OS is: Windows\nI am working in a workspace with the following folders:\n- e:\\Code\\hecom-opensdk-mcp \nI am working in a workspace that has the following structure:\n```\na.json\nb.json\nc.json\nLICENSE.md\npackage.json\nREADME.md\ntsconfig.json\nsrc/\n\tHecomClient.ts\n\tindex.ts\n\tdoc/\n\t\tbiz-data.md\n\t\tButton.md\n\t\tdetail-page.md\n\t\tdevice.md\n\t\tFilePicker.md\n\t\tFlex.md\n\t\tform-page.md\n\t\tLink.md\n\t\tmeta-data.md\n\t\tModal.md\n\t\tnetwork.md\n\t\torg-data.md\n\t\tstorage.md\n\t\tstyle.md\n\t\tText.md\n\t\tuser-interface.md\ntest/\n\tuser_story.test.ts\n```\nThis view of the workspace structure may be truncated. You can use tools to collect more context if needed.\n</context>\n<file>\n```json\n// filepath: e:\\Code\\hecom-opensdk-mcp\\c.json\n\n```\n</file>\n\n<reminder>\nWhen using the insert_edit_into_file tool, avoid repeating existing code, instead use a line comment with `...existing code...` to represent regions of unchanged code.\n</reminder>\n<prompt>\n有哪些本月开始的正式项目\n</prompt>"
+        },
+        {
+            "role": "assistant",
+            "content": "",
+            "tool_calls": [
+                {
+                    "function": {
+                        "name": "9f1_get-object-data-by-sql",
+                        "arguments": "{\"sql\":\"SELECT * FROM project WHERE bizType = 'defaultBizType' AND jhkgsj >= '2025-05-01' AND jhkgsj < '2025-06-01'\"}"
+                    },
+                    "id": "call_HKgbdqprf82rMGP5QDVOSwAL",
+                    "type": "function"
+                }
+            ]
+        },
+        {
+            "role": "tool",
+            "content": "select field is missing",
+            "tool_call_id": "call_HKgbdqprf82rMGP5QDVOSwAL"
+        },
+        {
+            "role": "assistant",
+            "content": "查询失败，提示缺少选择字段（select field is missing）。这意味着查询语句中需要明确指定要查询的字段，而不能直接使用 `SELECT *`。\n\n让我调整查询语句，明确选择需要的字段，例如项目名称、项目编号、计划开工时间等。稍等，我会重新尝试查询。",
+            "tool_calls": [
+                {
+                    "function": {
+                        "name": "9f1_get-object-data-by-sql",
+                        "arguments": "{\"sql\":\"SELECT name, xmbh, jhkgsj FROM project WHERE bizType = 'defaultBizType' AND jhkgsj >= '2025-05-01' AND jhkgsj < '2025-06-01'\"}"
+                    },
+                    "id": "call_k4CbogjlkONibYoK66vnFYmD",
+                    "type": "function"
+                }
+            ]
+        },
+        {
+            "role": "tool",
+            "content": "筛选条件配置有误，请修改后重试",
+            "tool_call_id": "call_k4CbogjlkONibYoK66vnFYmD"
+        },
+        {
+            "role": "assistant",
+            "content": "查询失败，提示筛选条件配置有误。这可能是因为字段名称或条件设置不正确。\n\n根据项目对象的描述，字段名称如 `jhkgsj`（计划开工时间）和 `bizType`（项目阶段）应该是正确的。我可以进一步检查字段的具体配置，或者调整查询条件以确保查询成功。请稍等，我会继续尝试解决问题。",
+            "tool_calls": [
+                {
+                    "function": {
+                        "name": "9f1_get-object-desc",
+                        "arguments": "{\"name\":\"project\"}"
+                    },
+                    "id": "call_LiToXAyRTCiWlHujFblsWzIz",
+                    "type": "function"
+                }
+            ]
+        },
+        {
+            "role": "tool",
+            "content": "{\"bizTypes\":[{\"name\":\"bizTypQQ\",\"label\":\"前期项目\"},{\"name\":\"defaultBizType\",\"label\":\"正式项目\"}],\"fields\":[{\"type\":\"Location\",\"subType\":\"Any\",\"name\":\"field2\",\"label\":\"项目位置\"},{\"type\":\"Select\",\"subType\":\"Local\",\"name\":\"serviceCondition\",\"label\":\"劳务使用状态\",\"selectItems\":[{\"name\":\"o1\",\"label\":\"未使用\"},{\"name\":\"o2\",\"label\":\"使用中\"},{\"name\":\"o3\",\"label\":\"已停用\"}]},{\"type\":\"Boolean\",\"name\":\"whetherPushed\",\"label\":\"是否已推送至劳务\"},{\"type\":\"Time\",\"name\":\"latestPushTime\",\"label\":\"最新推送时间\"},{\"type\":\"Text\",\"subType\":\"Short\",\"name\":\"latestPushResults\",\"label\":\"最新推送结果\"},{\"type\":\"Text\",\"subType\":\"Short\",\"name\":\"projectDockingCode\",\"label\":\"L-项目识别码\"},{\"type\":\"Real\",\"name\":\"field1\",\"label\":\"实数b1\"},{\"type\":\"Select\",\"subType\":\"Public\",\"name\":\"operationType\",\"label\":\"经营类型(系统)\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"xmqtsrhtjsje\",\"label\":\"F-累计项目其他收入合同结算金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljzzczlhtjsje\",\"label\":\"F-累计周转材租赁合同结算金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"clysze\",\"label\":\"材料预算总额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljstjtjsje\",\"label\":\"F-累计商砼合同结算金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"fbysze\",\"label\":\"分包预算总额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljfbhtfkje\",\"label\":\"F-累计分包合同付款金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljachtjsje\",\"label\":\"F-累计安拆合同结算金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljstgyhtfkje\",\"label\":\"F-累计商砼供应合同付款金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"qtfyysze\",\"label\":\"其他费用预算总额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljclcghtjsje\",\"label\":\"F-累计材料采购合同结算金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljsbgzhtfkje\",\"label\":\"F-累计设备购置合同付款金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljxmbx\",\"label\":\"累计项目报销金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"jxysze\",\"label\":\"机械预算总额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"zcbys\",\"label\":\"预算总额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljsbzlhtfkje\",\"label\":\"F-累计设备租赁合同付款金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"zhtjsje\",\"label\":\"F-累计主合同结算金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljzzcjlhtfkje\",\"label\":\"F-累计周转材租赁合同付款金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljdxsbachtfkje\",\"label\":\"F-累计大型设备安拆合同付款金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljxmqtzchtfkje\",\"label\":\"F-累计项目其他支出合同付款金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljecjyje\",\"label\":\"F-累计二次经营金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljxmqtzchtjsje\",\"label\":\"F-累计项目其他支出合同结算金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljxmqtsrhtje\",\"label\":\"F-累计项目其他收入合同金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljfkje\",\"label\":\"累计项目付款\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljclcghtje\",\"label\":\"F-累计材料采购合同金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljsbzlhtjsje\",\"label\":\"F-累计设备租赁合同结算金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljsthtje\",\"label\":\"F-累计商砼合同金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljsbzlhtje\",\"label\":\"F-累计设备租赁合同金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljclcghtfkje\",\"label\":\"F-累计材料采购合同付款金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"fbjsze\",\"label\":\"分包结算总额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljachtje\",\"label\":\"F-累计安拆合同金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljskje\",\"label\":\"累计收款金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljspje\",\"label\":\"累计收票金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljzzczlhtje\",\"label\":\"F-累计周转材租赁合同金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljkpje\",\"label\":\"累计开票金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljfbhtje\",\"label\":\"F-累计分包合同金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljfbbgje\",\"label\":\"F-累计分包变更金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljxmqtzchtje\",\"label\":\"F-累计项目其他支出合同金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljsbgzhtje\",\"label\":\"F-累计设备购置合同金额\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"field101\",\"label\":\"F-累计无合同支出金额\"},{\"type\":\"Aggregation\",\"subType\":\"Count\",\"name\":\"ljzhts\",\"label\":\"F-累计主合同数\"},{\"type\":\"Aggregation\",\"subType\":\"Sum\",\"name\":\"ljzhtje\",\"label\":\"F-累计主合同金额\"},{\"type\":\"Select\",\"subType\":\"Public\",\"name\":\"projectStatus\",\"label\":\"项目状态\"},{\"type\":\"District\",\"name\":\"projectAddress\",\"label\":\"工程地域\"},{\"type\":\"Lookup\",\"subType\":\"Org\",\"name\":\"projectDept\",\"label\":\"所属项目部\"},{\"type\":\"Lookup\",\"subType\":\"User\",\"name\":\"updatedBy\",\"label\":\"修改人\"},{\"type\":\"Time\",\"name\":\"updatedOn\",\"label\":\"修改时间\"},{\"type\":\"Boolean\",\"name\":\"isReadOnly\",\"label\":\"只读\"},{\"type\":\"BizType\",\"name\":\"bizType\",\"label\":\"项目阶段\"},{\"type\":\"Lookup\",\"subType\":\"User\",\"name\":\"owner\",\"label\":\"负责人\"},{\"type\":\"Lookup\",\"subType\":\"Org\",\"name\":\"dept\",\"label\":\"所属部门\"},{\"type\":\"Lookup\",\"subType\":\"User\",\"name\":\"createdBy\",\"label\":\"创建人\"},{\"type\":\"Time\",\"name\":\"createdOn\",\"label\":\"创建时间\"},{\"type\":\"Text\",\"subType\":\"Short\",\"name\":\"name\",\"label\":\"项目名称\"},{\"type\":\"AutoCode\",\"name\":\"xmbh\",\"label\":\"项目编号\"},{\"type\":\"Select\",\"subType\":\"Local\",\"name\":\"xmlb\",\"label\":\"项目类别\",\"selectItems\":[{\"name\":\"option238\",\"label\":\"房建\"},{\"name\":\"option239\",\"label\":\"市政\"},{\"name\":\"option240\",\"label\":\"机电安装\"},{\"name\":\"option241\",\"label\":\"公路\"},{\"name\":\"option242\",\"label\":\"铁路\"},{\"name\":\"option243\",\"label\":\"电力\"},{\"name\":\"option244\",\"label\":\"水利水电\"},{\"name\":\"option245\",\"label\":\"其他\"}]},{\"type\":\"Select\",\"subType\":\"Local\",\"name\":\"jylx\",\"label\":\"经营类型\",\"selectItems\":[{\"name\":\"option246\",\"label\":\"自营\"},{\"name\":\"option247\",\"label\":\"联营\"}]},{\"type\":\"Lookup\",\"subType\":\"customer\",\"name\":\"khmc\",\"label\":\"客户\"},{\"type\":\"Date\",\"name\":\"jhkgsj\",\"label\":\"计划开工时间\"},{\"type\":\"Date\",\"name\":\"jhjgsj\",\"label\":\"计划竣工时间\"},{\"type\":\"Expression\",\"subType\":\"Number\",\"name\":\"gq\",\"label\":\"工期\"},{\"type\":\"Text\",\"subType\":\"Text\",\"name\":\"gcgk\",\"label\":\"工程概况\"},{\"type\":\"Text\",\"subType\":\"Text\",\"name\":\"bz\",\"label\":\"备注\"},{\"type\":\"File\",\"name\":\"fj\",\"label\":\"附件\"},{\"type\":\"Lookup\",\"subType\":\"User\",\"name\":\"xmjl\",\"label\":\"项目经理\"},{\"type\":\"MultiLookup\",\"subType\":\"User\",\"name\":\"ysy\",\"label\":\"预算员\"},{\"type\":\"MultiLookup\",\"subType\":\"User\",\"name\":\"cly\",\"label\":\"材料员\"},{\"type\":\"MultiLookup\",\"subType\":\"User\",\"name\":\"zlaqy\",\"label\":\"质量安全员\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"xmzjye\",\"label\":\"项目现金流\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"ljsjcb\",\"label\":\"累计支出金额\"},{\"type\":\"Expression\",\"subType\":\"Percent\",\"name\":\"yssybl\",\"label\":\"管理利润率\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"ljjxjse\",\"label\":\"机械结算总额\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"ljcljse\",\"label\":\"材料结算总额\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"ljzchte\",\"label\":\"支出合同总额\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"qtfyze\",\"label\":\"其他费用总额\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"dtcb\",\"label\":\"动态成本\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"bjcb\",\"label\":\"管理利润\"},{\"type\":\"Expression\",\"subType\":\"Percent\",\"name\":\"cljszysbl\",\"label\":\"材料结算占预算比例\"},{\"type\":\"Expression\",\"subType\":\"Percent\",\"name\":\"jxjszysbl\",\"label\":\"机械结算占预算比例\"},{\"type\":\"Expression\",\"subType\":\"Percent\",\"name\":\"fbjszysbl\",\"label\":\"分包结算占预算比例\"},{\"type\":\"Expression\",\"subType\":\"Percent\",\"name\":\"qtfyzysbl\",\"label\":\"其他费用占预算比例\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"srhtze\",\"label\":\"收入合同总额\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"szhtce\",\"label\":\"收支合同差额\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"srhtjsze\",\"label\":\"收入合同结算总额\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"ys\",\"label\":\"应收（收入结算-收款）\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"ljzchtjsje\",\"label\":\"累计支出合同结算金额\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"ljzchtfkje\",\"label\":\"累计支出合同付款金额\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"yf\",\"label\":\"应付（支出结算-付款）\"},{\"type\":\"Expression\",\"subType\":\"Currency\",\"name\":\"spjsc\",\"label\":\"收票结算差\"},{\"type\":\"Text\",\"subType\":\"Short\",\"name\":\"gcxxdz\",\"label\":\"工程详细地址\"},{\"type\":\"Text\",\"subType\":\"Short\",\"name\":\"xmjc\",\"label\":\"项目简称\"},{\"type\":\"Text\",\"subType\":\"Text\",\"name\":\"sm\",\"label\":\"说明\"}],\"name\":\"project\",\"label\":\"项目\"}",
+            "tool_call_id": "call_LiToXAyRTCiWlHujFblsWzIz"
+        },
+        {
+            "role": "assistant",
+            "content": "根据项目对象的描述，字段 `jhkgsj`（计划开工时间）和 `bizType`（项目阶段）是正确的，但查询失败可能是由于筛选条件的格式或其他配置问题。\n\n我将调整查询语句，确保筛选条件符合系统要求，并尝试再次查询本月开始的正式项目。",
+            "tool_calls": [
+                {
+                    "function": {
+                        "name": "9f1_get-object-data-by-sql",
+                        "arguments": "{\"sql\":\"SELECT name, xmbh, jhkgsj FROM project WHERE bizType = 'defaultBizType' AND jhkgsj >= DATE('2025-05-01') AND jhkgsj < DATE('2025-06-01')\"}"
+                    },
+                    "id": "call_kK7LKoXF3g0rCv1LyPXIKL1l",
+                    "type": "function"
+                }
+            ]
+        },
+        {
+            "role": "tool",
+            "content": "com.alibaba.druid.sql.ast.expr.SQLMethodInvokeExpr cannot be cast to com.alibaba.druid.sql.ast.expr.SQLValuableExpr",
+            "tool_call_id": "call_kK7LKoXF3g0rCv1LyPXIKL1l"
+        },
+        {
+            "role": "assistant",
+            "content": "查询失败，提示系统无法处理某些表达式类型。这可能是由于查询语句中使用了 `DATE` 函数，而系统不支持这种格式。\n\n我将调整查询语句，直接使用日期字符串而不调用函数，确保查询能够成功。稍等，我会重新尝试。",
+            "tool_calls": [
+                {
+                    "function": {
+                        "name": "9f1_get-object-data-by-sql",
+                        "arguments": "{\"sql\":\"SELECT name, xmbh, jhkgsj FROM project WHERE bizType = 'defaultBizType' AND jhkgsj >= '2025-05-01' AND jhkgsj < '2025-06-01'\"}"
+                    },
+                    "id": "call_2HarpGaTTIjP9u4TMo7YHUrk",
+                    "type": "function"
+                }
+            ]
+        },
+        {
+            "role": "tool",
+            "content": "筛选条件配置有误，请修改后重试",
+            "tool_call_id": "call_2HarpGaTTIjP9u4TMo7YHUrk"
+        },
+        {
+            "role": "user",
+            "content": "Above is the result of calling one or more tools. The user cannot see the results, so you should explain them to the user if referencing them in your answer. Continue from where you left off if needed without repeating yourself."
+        }
+    ],
+    "model": "gpt-4o",
+    "temperature": 0,
+    "top_p": 1,
+    "max_tokens": 4096,
+    "tools": [
+        {
+            "function": {
+                "name": "semantic_search",
+                "description": "Run a natural language search for relevant code or documentation comments from the user's current workspace. Returns relevant code snippets from the user's current workspace if it is large, or the full contents of the workspace if it is small.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "The query to search the codebase for. Should contain all relevant context. Should ideally be text that might appear in the codebase, such as function names, variable names, or comments."
+                        }
+                    },
+                    "required": ["query"]
+                }
+            },
+            "type": "function"
+        },
+        {
+            "function": {
+                "name": "list_code_usages",
+                "description": "Request to list all usages (references, definitions, implementations etc) of a function, class, method, variable etc. Use this tool when \n1. Looking for a sample implementation of an interface or class\n2. Checking how a function is used throughout the codebase.\n3. Including and updating all usages when changing a function, method, or constructor",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "symbolName": {
+                            "type": "string",
+                            "description": "The name of the symbol, such as a function name, class name, method name, variable name, etc."
+                        },
+                        "filePaths": {
+                            "type": "array",
+                            "description": "One or more file paths which likely contain the definition of the symbol. For instance the file which declares a class or function. This is optional but will speed up the invocation of this tool and improve the quality of its output.",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "required": ["symbolName"]
+                }
+            },
+            "type": "function"
+        },
+        {
+            "function": {
+                "name": "get_vscode_api",
+                "description": "Get relevant VS Code API references to answer questions about VS Code extension development. Use this tool when the user asks about VS Code APIs, capabilities, or best practices related to developing VS Code extensions. Use it in all VS Code extension development workspaces.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "The query to search vscode documentation for. Should contain all relevant context."
+                        }
+                    },
+                    "required": ["query"]
+                }
+            },
+            "type": "function"
+        },
+        {
+            "function": {
+                "name": "file_search",
+                "description": "Search for files in the workspace by glob pattern. This only returns the paths of matching files. Limited to 20 results. Use this tool when you know the exact filename pattern of the files you're searching for. Glob patterns match from the root of the workspace folder. Examples:\n- **/*.{js,ts} to match all js/ts files in the workspace.\n- src/** to match all files under the top-level src folder.\n- **/foo/**/*.js to match all js files under any foo folder in the workspace.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "Search for files with names or paths matching this query. Can be a glob pattern."
+                        }
+                    },
+                    "required": ["query"]
+                }
+            },
+            "type": "function"
+        },
+        {
+            "function": {
+                "name": "grep_search",
+                "description": "Do a text search in the workspace. Limited to 20 results. Use this tool when you know the exact string you're searching for.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "The pattern to search for in files in the workspace. Can be a regex or plain text pattern"
+                        },
+                        "isRegexp": {
+                            "type": "boolean",
+                            "description": "Whether the pattern is a regex. False by default."
+                        },
+                        "includePattern": {
+                            "type": "string",
+                            "description": "Search files matching this glob pattern. Will be applied to the relative path of files within the workspace."
+                        }
+                    },
+                    "required": ["query"]
+                }
+            },
+            "type": "function"
+        },
+        {
+            "function": {
+                "name": "read_file",
+                "description": "Read the contents of a file.\n\nYou must specify the line range you're interested in, and if the file is larger, you will be given an outline of the rest of the file. If the file contents returned are insufficient for your task, you may call this tool again to retrieve more content.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "filePath": {
+                            "description": "The absolute path of the file to read.",
+                            "type": "string"
+                        },
+                        "startLineNumberBaseZero": {
+                            "type": "number",
+                            "description": "The line number to start reading from, 0-based."
+                        },
+                        "endLineNumberBaseZero": {
+                            "type": "number",
+                            "description": "The inclusive line number to end reading at, 0-based."
+                        }
+                    },
+                    "required": ["filePath", "startLineNumberBaseZero", "endLineNumberBaseZero"]
+                }
+            },
+            "type": "function"
+        },
+        {
+            "function": {
+                "name": "list_dir",
+                "description": "List the contents of a directory. Result will have the name of the child. If the name ends in /, it's a folder, otherwise a file",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "path": {
+                            "type": "string",
+                            "description": "The absolute path to the directory to list."
+                        }
+                    },
+                    "required": ["path"]
+                }
+            },
+            "type": "function"
+        },
+        {
+            "function": {
+                "name": "run_in_terminal",
+                "description": "Run a shell command in a terminal. State is persistent across tool calls.\n- Use this tool instead of printing a shell codeblock and asking the user to run it.\n- If the command is a long-running background process, you MUST pass isBackground=true. Background terminals will return a terminal ID which you can use to check the output of a background process with get_terminal_output.\n- If a command may use a pager, you must something to disable it. For example, you can use `git --no-pager`. Otherwise you should add something like ` | cat`. Examples: git, less, man, etc.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "command": {
+                            "type": "string",
+                            "description": "The command to run in the terminal."
+                        },
+                        "explanation": {
+                            "type": "string",
+                            "description": "A one-sentence description of what the command does. This will be shown to the user before the command is run."
+                        },
+                        "isBackground": {
+                            "type": "boolean",
+                            "description": "Whether the command starts a background process. If true, the command will run in the background and you will not see the output. If false, the tool call will block on the command finishing, and then you will get the output. Examples of backgrond processes: building in watch mode, starting a server. You can check the output of a backgrond process later on by using get_terminal_output."
+                        }
+                    },
+                    "required": ["command", "explanation", "isBackground"]
+                }
+            },
+            "type": "function"
+        },
+        {
+            "function": {
+                "name": "get_terminal_output",
+                "description": "Get the output of a terminal command previous started with run_in_terminal",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "description": "The ID of the terminal command output to check."
+                        }
+                    },
+                    "required": ["id"]
+                }
+            },
+            "type": "function"
+        },
+        {
+            "function": {
+                "name": "get_errors",
+                "description": "Get any compile or lint errors in a code file. If the user mentions errors or problems in a file, they may be referring to these. Use the tool to see the same errors that the user is seeing. Also use this tool after editing a file to validate the change.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "filePaths": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "required": ["filePaths"]
+                }
+            },
+            "type": "function"
+        },
+        {
+            "function": {
+                "name": "get_changed_files",
+                "description": "Get git diffs of current file changes in the active git repository. Don't forget that you can use run_in_terminal to run git commands in a terminal as well.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "repositoryPath": {
+                            "type": "string",
+                            "description": "The absolute path to the git repository to look for changes in."
+                        },
+                        "sourceControlState": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": ["staged", "unstaged", "merge-conflicts"]
+                            },
+                            "description": "The kinds of git state to filter by. Allowed values are: 'staged', 'unstaged', and 'merge-conflicts'. If not provided, all states will be included."
+                        }
+                    },
+                    "required": ["repositoryPath"]
+                }
+            },
+            "type": "function"
+        },
+        {
+            "function": {
+                "name": "create_new_workspace",
+                "description": "Get steps to help the user create any project in a VS Code workspace. Use this tool to help users set up new projects, including TypeScript-based projects, Model Context Protocol (MCP) servers, VS Code extensions, Next.js projects, Vite projects, or any other project.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "The query to use to generate the new workspace. This should be a clear and concise description of the workspace the user wants to create."
+                        }
+                    },
+                    "required": ["query"]
+                }
+            },
+            "type": "function"
+        },
+        {
+            "function": {
+                "name": "get_project_setup_info",
+                "description": "Do not call this tool without first calling the tool to create a workspace. This tool provides a project setup information for a Visual Studio Code workspace based on a project type and programming language.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "projectType": {
+                            "type": "string",
+                            "description": "The type of project to create. Supported values are: 'basic', 'mcp-server', 'model-context-protocol-server', 'vscode-extension', 'next-js', 'vite' and 'other'"
+                        },
+                        "language": {
+                            "type": "string",
+                            "description": "The programming language for the project. Supported: 'javascript', 'typescript', 'python' and 'other'."
+                        }
+                    },
+                    "required": ["projectType"]
+                }
+            },
+            "type": "function"
+        },
+        {
+            "function": {
+                "name": "install_extension",
+                "description": "Install an extension in VS Code. Use this tool to install an extension in Visual Studio Code as part of a new workspace creation process only.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "description": "The ID of the extension to install. This should be in the format <publisher>.<extension>."
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "The name of the extension to install. This should be a clear and concise description of the extension."
+                        }
+                    },
+                    "required": ["id", "name"]
+                }
+            },
+            "type": "function"
+        },
+        {
+            "function": {
+                "name": "create_new_jupyter_notebook",
+                "description": "Generates a new Jupyter Notebook (.ipynb) in VS Code. Jupyter Notebooks are interactive documents commonly used for data exploration, analysis, visualization, and combining code with narrative text. This tool should only be called when the user explicitly requests to create a new Jupyter Notebook.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "The query to use to generate the jupyter notebook. This should be a clear and concise description of the notebook the user wants to create."
+                        }
+                    },
+                    "required": ["query"]
+                }
+            },
+            "type": "function"
+        },
+        {
+            "function": {
+                "name": "insert_edit_into_file",
+                "description": "Insert new code into an existing file in the workspace. Use this tool once per file that needs to be modified, even if there are multiple changes for a file. Generate the \"explanation\" property first.\nThe system is very smart and can understand how to apply your edits to the files, you just need to provide minimal hints.\nAvoid repeating existing code, instead use comments to represent regions of unchanged code. Be as concise as possible. For example:\n// ...existing code...\n{ changed code }\n// ...existing code...\n{ changed code }\n// ...existing code...\n\nHere is an example of how you should use format an edit to an existing Person class:\nclass Person {\n\t// ...existing code...\n\tage: number;\n\t// ...existing code...\n\tgetAge() {\n\treturn this.age;\n\t}\n}",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "explanation": {
+                            "type": "string",
+                            "description": "A short explanation of the edit being made."
+                        },
+                        "filePath": {
+                            "type": "string",
+                            "description": "An absolute path to the file to edit."
+                        },
+                        "code": {
+                            "type": "string",
+                            "description": "The code change to apply to the file.\nThe system is very smart and can understand how to apply your edits to the files, you just need to provide minimal hints.\nAvoid repeating existing code, instead use comments to represent regions of unchanged code. Be as concise as possible. For example:\n// ...existing code...\n{ changed code }\n// ...existing code...\n{ changed code }\n// ...existing code...\n\nHere is an example of how you should use format an edit to an existing Person class:\nclass Person {\n\t// ...existing code...\n\tage: number;\n\t// ...existing code...\n\tgetAge() {\n\t\treturn this.age;\n\t}\n}"
+                        }
+                    },
+                    "required": ["explanation", "filePath", "code"]
+                }
+            },
+            "type": "function"
+        },
+        {
+            "function": {
+                "name": "fetch_webpage",
+                "description": "Fetches the main content from a web page. This tool is useful for summarizing or analyzing the content of a webpage. You should use this tool when you think the user is looking for information from a specific webpage.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "urls": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "description": "An array of URLs to fetch content from."
+                        },
+                        "query": {
+                            "type": "string",
+                            "description": "The query to search for in the web page's content. This should be a clear and concise description of the content you want to find."
+                        }
+                    },
+                    "required": ["urls", "query"]
+                }
+            },
+            "type": "function"
+        },
+        {
+            "function": {
+                "name": "test_search",
+                "description": "For a source code file, find the file that contains the tests. For a test file find the file that contains the code under test.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "filePaths": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "required": ["filePaths"]
+                }
+            },
+            "type": "function"
+        },
+        {
+            "function": {
+                "name": "9f1_get-object-desc",
+                "description": "获取对象的描述，包括对象bizType列表和field列表，如果用户提到了具体的对象，始终应该先调用这个工具来获取对象的描述",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "label": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "对象name"
+                        }
+                    },
+                    "required": ["name"],
+                    "additionalProperties": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                }
+            },
+            "type": "function"
+        },
+        {
+            "function": {
+                "name": "9f1_mark-objects",
+                "description": "专注某些对象，当用户需要 **标记** **选择** 某些特定对象时使用，如果你不知道有哪些对象可以选择，可以先调用 get-objects 工具",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "objects": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "label": {
+                                        "type": "string",
+                                        "description": "对象标签"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "对象name"
+                                    }
+                                },
+                                "required": ["name"],
+                                "additionalProperties": false
+                            }
+                        }
+                    },
+                    "required": ["objects"],
+                    "additionalProperties": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                }
+            },
+            "type": "function"
+        },
+        {
+            "function": {
+                "name": "9f1_get-object-data-by-sql",
+                "description": "使用 SQL 语句查询对象数据，如果你不了解对象的数据结构，可以先调用get-object-desc工具来获取对象的描述。\n        SQL 仅支持基础的查询，不支持复杂的查询和联表查询，不支持函数例如SUM、YEAR等。\n    ",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "sql": {
+                            "type": "string",
+                            "description": "SQL 语句"
+                        }
+                    },
+                    "required": ["sql"],
+                    "additionalProperties": false,
+                    "$schema": "http://json-schema.org/draft-07/schema#"
+                }
+            },
+            "type": "function"
+        }
+    ],
+    "n": 1,
+    "stream": true
+}
