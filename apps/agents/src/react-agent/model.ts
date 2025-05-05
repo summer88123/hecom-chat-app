@@ -1,5 +1,5 @@
 import { ChatOpenAI } from "@langchain/openai";
-import { BaseChatModel } from "@langchain/core/language_models/chat_models";
+
 const model = new ChatOpenAI({
   model: "moonshot-v1-128k",
   configuration: {
@@ -11,6 +11,6 @@ const model = new ChatOpenAI({
 /**
  * Load a chat model from a fully specified name.
  */
-export async function loadChatModel(): Promise<BaseChatModel> {
+export async function loadChatModel(): Promise<ChatOpenAI> {
   return model;
 }

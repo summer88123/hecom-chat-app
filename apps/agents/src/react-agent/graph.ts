@@ -1,11 +1,29 @@
-import { AIMessage } from "@langchain/core/messages";
+import { AIMessage, ToolMessage } from "@langchain/core/messages";
 import { RunnableConfig } from "@langchain/core/runnables";
-import { MessagesAnnotation, StateGraph } from "@langchain/langgraph";
-import { ToolNode } from "@langchain/langgraph/prebuilt";
-
 import { ConfigurationSchema, ensureConfiguration } from "./configuration.js";
+import {
+  Command,
+  MessagesAnnotation,
+  StateGraph,
+  START,
+  END,
+  MemorySaver,
+  interrupt,
+} from "@langchain/langgraph";
+import {
+  ToolNode,
+  HumanInterrupt,
+  HumanInterruptConfig,
+  ActionRequest,
+  HumanResponse,
+} from "@langchain/langgraph/prebuilt";
+import { ToolCall } from "@langchain/core/messages/tool";
 import { MCPClient } from "./client.js";
 import { loadChatModel } from "./model.js";
+
+const NODE_TOOL = "tools";
+const NODE_HUMAN = "human-review";
+const NODE_LLM = "call-model";
 
 const mcpClient = new MCPClient();
 
@@ -20,11 +38,8 @@ async function callModel(
 ): Promise<typeof MessagesAnnotation.Update> {
   /** Call the LLM powering our agent. **/
   const configuration = ensureConfiguration(config);
-
   // Feel free to customize the prompt, model, and other logic!
   const model = (await loadChatModel())?.bindTools(mcpClient.getTools());
-
-  console.log("bind tools");
   const systemPrompt = await configuration.systemPromptTemplate.format({
     system_time: new Date().toISOString(),
     object_list: object_list,
@@ -51,37 +66,90 @@ function routeModelOutput(state: typeof MessagesAnnotation.State): string {
   const lastMessage = messages[messages.length - 1];
   // If the LLM is invoking tools, route there.
   if ((lastMessage as AIMessage)?.tool_calls?.length || 0 > 0) {
-    return "tools";
+    return NODE_HUMAN;
   }
   // Otherwise end the graph.
   else {
-    return "__end__";
+    return END;
   }
+}
+
+// Create a node that asks the human to confirm tool calls
+async function humanConfirmToolCalls(
+  state: typeof MessagesAnnotation.State
+): Promise<Command> {
+  const lastMessage = state.messages[state.messages.length - 1] as AIMessage;
+  const toolCall = lastMessage.tool_calls![lastMessage.tool_calls!.length - 1];
+
+  const result: HumanResponse = interrupt<HumanInterrupt, HumanResponse>({
+    action_request: {
+      action: toolCall.name,
+      args: toolCall.args,
+    },
+    config: {
+      allow_accept: true,
+      allow_edit: true,
+      allow_ignore: true,
+      allow_respond: true,
+    },
+    description: "请确认工具调用",
+  });
+  const humanReview = Array.isArray(result) ? result[0] : result;
+  console.log("humanReview", JSON.stringify(humanReview, null, 2));
+  const reviewAction = humanReview.type;
+  const reviewData = humanReview.args;
+
+  if (reviewAction === "accept") {
+    return new Command({ goto: NODE_TOOL });
+  } else if (reviewAction === "edit") {
+    const updatedMessage = {
+      role: "ai",
+      content: lastMessage.content,
+      tool_calls: [
+        {
+          id: toolCall.id,
+          name: toolCall.name,
+          args: reviewData?.args,
+        },
+      ],
+      id: lastMessage.id,
+    };
+    return new Command({
+      goto: NODE_TOOL,
+      update: { messages: [updatedMessage] },
+    });
+  } else if (reviewAction === "response") {
+    const toolMessage = new ToolMessage({
+      name: toolCall.name,
+      content: reviewData,
+      tool_call_id: toolCall.id,
+    });
+    return new Command({
+      goto: NODE_LLM,
+      update: { messages: [toolMessage] },
+    });
+  }
+  throw new Error("Invalid review action");
 }
 
 // Define a new graph. We use the prebuilt MessagesAnnotation to define state:
 // https://langchain-ai.github.io/langgraphjs/concepts/low_level/#messagesannotation
 const workflow = new StateGraph(MessagesAnnotation, ConfigurationSchema)
-  // Define the two nodes we will cycle between
-  .addNode("callModel", callModel)
-  .addNode("tools", new ToolNode(mcpClient.getTools()))
+  // Define the nodes we will cycle between
+  .addNode(NODE_LLM, callModel)
+  .addNode(NODE_HUMAN, humanConfirmToolCalls, {
+    ends: [NODE_TOOL, NODE_LLM],
+  })
+  .addNode(NODE_TOOL, new ToolNode(mcpClient.getTools()))
   // Set the entrypoint as `callModel`
   // This means that this node is the first one called
-  .addEdge("__start__", "callModel")
-  .addConditionalEdges(
-    // First, we define the edges' source node. We use `callModel`.
-    // This means these are the edges taken after the `callModel` node is called.
-    "callModel",
-    // Next, we pass in the function that will determine the sink node(s), which
-    // will be called after the source node is called.
-    routeModelOutput
-  )
-  // This means that after `tools` is called, `callModel` node is called next.
-  .addEdge("tools", "callModel");
+  .addEdge(START, NODE_LLM)
+  .addConditionalEdges(NODE_LLM, routeModelOutput, [NODE_HUMAN, END])
+  .addEdge(NODE_TOOL, NODE_LLM);
 
 // Finally, we compile it!
 // This compiles it into a graph you can invoke and deploy.
 export const graph = workflow.compile({
-  interruptBefore: [], // if you want to update the state before calling the tools
+  interruptBefore: [], // Interrupt before the tools confirmation node
   interruptAfter: [],
 });
