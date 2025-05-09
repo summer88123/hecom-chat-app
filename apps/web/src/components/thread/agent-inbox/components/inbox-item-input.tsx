@@ -494,13 +494,13 @@ export function InboxItemInput({
           onEditChange={onEditChange}
           handleSubmit={handleSubmit}
         />
-        {supportsMultipleMethods ? (
+        {/* {supportsMultipleMethods ? (
           <div className="flex gap-3 items-center mx-auto mt-3">
             <Separator className="w-[full]" />
             <p className="text-sm text-gray-500">Or</p>
             <Separator className="w-full" />
           </div>
-        ) : null}
+        ) : null} */}
         <Response
           humanResponse={humanResponse}
           streaming={streaming}

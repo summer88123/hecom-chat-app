@@ -110,7 +110,7 @@ export function ThreadActionsView({
           <p className="text-2xl tracking-tighter text-pretty">{threadTitle}</p>
           {threadId && <ThreadIdCopyable threadId={threadId} />}
         </div>
-        <div className="flex flex-row gap-2 items-center justify-start">
+        {/* <div className="flex flex-row gap-2 items-center justify-start">
           {apiUrl && (
             <Button
               size="sm"
@@ -127,10 +127,10 @@ export function ThreadActionsView({
             showingState={showState}
             showingDescription={showDescription}
           />
-        </div>
+        </div> */}
       </div>
 
-      <div className="flex flex-row gap-2 items-center justify-start w-full">
+      {/* <div className="flex flex-row gap-2 items-center justify-start w-full">
         <Button
           variant="outline"
           className="text-gray-800 border-gray-500 font-normal bg-white"
@@ -149,7 +149,7 @@ export function ThreadActionsView({
             Ignore
           </Button>
         )}
-      </div>
+      </div> */}
 
       {/* Actions */}
       <InboxItemInput

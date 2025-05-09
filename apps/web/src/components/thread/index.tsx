@@ -371,12 +371,17 @@ export function Thread() {
             footer={
               <div className="sticky flex flex-col items-center gap-8 bottom-0 bg-white">
                 {!chatStarted && (
-                  <div className="flex gap-3 items-center">
-                    <LangGraphLogoSVG className="flex-shrink-0 h-8" />
-                    <h1 className="text-2xl font-semibold tracking-tight">
-                      Agent Chat
-                    </h1>
-                  </div>
+                  <>
+                    <div className="flex gap-3 items-center">
+                      <LangGraphLogoSVG className="flex-shrink-0 h-8" />
+                      <h1 className="text-2xl font-semibold tracking-tight">
+                        Agent Chat
+                      </h1>
+                    </div>
+                    <p className="text-muted-foreground text-sm text-center">
+                      Agent关联了线上企业：红圈PMP工程企业v3.0。可以查询对象信息和对象数据。
+                    </p>
+                  </>
                 )}
 
                 <ScrollToBottom className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 animate-in fade-in-0 zoom-in-95" />

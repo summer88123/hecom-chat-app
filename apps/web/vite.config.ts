@@ -11,4 +11,11 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+
+  server: {
+    host: "0.0.0.0", // 或者 true
+  },
+
+  // 从项目根目录加载环境变量
+  // envDir: path.resolve(__dirname, '../../')
 });

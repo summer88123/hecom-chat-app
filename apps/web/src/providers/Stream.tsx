@@ -121,7 +121,8 @@ const StreamSession = ({
 };
 
 // Default values for the form
-const DEFAULT_API_URL = "http://localhost:2024";
+const DEFAULT_API_URL = "http://172.16.7.54:2024";
+// const DEFAULT_API_URL = "http://localhost:2024";
 const DEFAULT_ASSISTANT_ID = "agent";
 
 export const StreamProvider: React.FC<{ children: ReactNode }> = ({
@@ -170,6 +171,8 @@ export const StreamProvider: React.FC<{ children: ReactNode }> = ({
             <p className="text-muted-foreground">
               Welcome to Agent Chat! Before you get started, you need to enter
               the URL of the deployment and the assistant / graph ID.
+              <br />
+              不需要修改参数，直接点击继续即可。
             </p>
           </div>
           <form
@@ -225,7 +228,7 @@ export const StreamProvider: React.FC<{ children: ReactNode }> = ({
               />
             </div>
 
-            <div className="flex flex-col gap-2">
+            {/* <div className="flex flex-col gap-2">
               <Label htmlFor="apiKey">LangSmith API Key</Label>
               <p className="text-muted-foreground text-sm">
                 This is <strong>NOT</strong> required if using a local LangGraph
@@ -240,7 +243,7 @@ export const StreamProvider: React.FC<{ children: ReactNode }> = ({
                 className="bg-background"
                 placeholder="lsv2_pt_..."
               />
-            </div>
+            </div> */}
 
             <div className="flex justify-end mt-2">
               <Button type="submit" size="lg">

@@ -89,8 +89,8 @@ async function humanConfirmToolCalls(
     config: {
       allow_accept: true,
       allow_edit: true,
-      allow_ignore: true,
-      allow_respond: true,
+      allow_ignore: false,
+      allow_respond: false,
     },
     description: "请确认工具调用",
   });
