@@ -66,8 +66,6 @@ export function ToolCalls({
 }
 
 export function ToolResult({ message }: { message: ToolMessage }) {
-  const [isExpanded, setIsExpanded] = useState(false);
-
   let parsedContent: any;
   let isJsonContent = false;
 
@@ -86,6 +84,7 @@ export function ToolResult({ message }: { message: ToolMessage }) {
     : String(message.content);
   const contentLines = contentStr.split("\n");
   const shouldTruncate = contentLines.length > 4 || contentStr.length > 500;
+  const [isExpanded, setIsExpanded] = useState(!shouldTruncate);
   const displayedContent =
     shouldTruncate && !isExpanded
       ? contentStr.length > 500
@@ -162,7 +161,7 @@ export function ToolResult({ message }: { message: ToolMessage }) {
                     </tbody>
                   </table>
                 ) : (
-                  <code className="text-sm block">{displayedContent}</code>
+                  <p>{displayedContent}</p>
                 )}
               </motion.div>
             </AnimatePresence>
