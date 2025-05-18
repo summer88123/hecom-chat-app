@@ -379,7 +379,8 @@ export function Thread() {
                       </h1>
                     </div>
                     <p className="text-muted-foreground text-sm text-center">
-                      Agent关联了线上企业：红圈PMP工程企业v3.0。可以查询对象信息和对象数据。
+                      Agent关联了线上企业：红圈PMP工程企业v3.0。可以查询对象信息和对象数据。<br/>
+                      可以创建员工，注意需要手动将返回的部门列表删除到只剩一个部门，用于模拟手动选择部门。
                     </p>
                   </>
                 )}
