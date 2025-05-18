@@ -10,6 +10,7 @@ export class MCPClient {
   private transport: StdioClientTransport | null = null;
   private tools: Tool[] = [];
   private getObjectsTool: Tool | null = null;
+  private queryDeptListTool: Tool | null = null;
 
   constructor() {
     this.mcp = new Client({ name: "mcp-client-cli", version: "1.0.0" });
@@ -42,11 +43,28 @@ export class MCPClient {
 
       this.getObjectsTool =
         this.tools.find((tool) => tool.name === "get-objects") || null;
-      this.tools = this.tools.filter((tool) => tool.name !== "get-objects");
+      this.queryDeptListTool =
+        this.tools.find((tool) => tool.name === "query-dept-list") || null;
+      this.tools = this.tools.filter(
+        (tool) => tool.name !== "get-objects" && tool.name !== "query-dept-list"
+      );
     } catch (e) {
       console.log("Failed to connect to MCP server: ", e);
       throw e;
     }
+  }
+
+  public async queryDeptList() {
+    if (!this.queryDeptListTool) {
+      throw new Error(
+        "query-dept-list tool not found. Please connect to the server first."
+      );
+    }
+    const data = await this.queryDeptListTool.invoke({
+      sql: "SELECT code, name FROM Org",
+    });
+
+    return JSON.parse(data);
   }
 
   public async getObjects() {

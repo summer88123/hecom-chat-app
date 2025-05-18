@@ -159,7 +159,14 @@ export default function useInterruptedActions({
           });
           return;
         }
-
+        if (input.args && input.args.args) {
+          Object.keys(input.args.args).forEach((key) => {
+            const value = input.args.args[key];
+            if (value.startsWith("{") && value.endsWith("}")) {
+              input.args.args[key] = JSON.parse(value);
+            }
+          });
+        }
         setLoading(true);
         setStreaming(true);
         const resumedSuccessfully = resumeRun([input]);

@@ -30,6 +30,8 @@ const mcpClient = new MCPClient();
 await mcpClient.connectToServer();
 
 const object_list = await mcpClient.getObjects();
+const dept_list = await mcpClient.queryDeptList();
+console.log("dept_list", dept_list);
 
 // Define the function that calls the model
 async function callModel(
@@ -80,6 +82,12 @@ async function humanConfirmToolCalls(
 ): Promise<Command> {
   const lastMessage = state.messages[state.messages.length - 1] as AIMessage;
   const toolCall = lastMessage.tool_calls![lastMessage.tool_calls!.length - 1];
+
+  if (toolCall.name === "create-user" && !toolCall.args.dept) {
+    toolCall.args.dept = dept_list
+      .slice(0, 2)
+      .map((dept) => ({ name: dept.name, code: dept.code }));
+  }
 
   const result: HumanResponse = interrupt<HumanInterrupt, HumanResponse>({
     action_request: {
