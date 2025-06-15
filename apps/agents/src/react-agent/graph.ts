@@ -158,6 +158,7 @@ const workflow = new StateGraph(MessagesAnnotation, ConfigurationSchema)
 // Finally, we compile it!
 // This compiles it into a graph you can invoke and deploy.
 export const graph = workflow.compile({
+  checkpointer: new MemorySaver(),
   interruptBefore: [], // Interrupt before the tools confirmation node
   interruptAfter: [],
 });
