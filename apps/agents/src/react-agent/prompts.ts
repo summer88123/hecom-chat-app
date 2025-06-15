@@ -25,6 +25,8 @@ export const SYSTEM_PROMPT_TEMPLATE = `
 - 只能生成最基本的SQL查询语句，不支持聚合函数，也不支持where语法中的函数。
 - 查询SQL必须明确指定查询的字段，不能使用*号。
 - Select或MultiSelect字段在SQL中需要使用选项(selectItems)的name。
+- Lookup或MainDetail字段是外键，subType属性对应metaName，在SQL的where条件中，需要先使用query-code-by-name工具查询出对应的code，然后在SQL中使用code进行查询。
+- Lookup或MainDetail字段在SQL中，只能使用 where fieldName = 'code' 的形式进行查询，不能直接中用名称或其他属性进行查询。
 
 ## 工作流程:
   1. 根据用户的问题，查询相关的对象信息。
